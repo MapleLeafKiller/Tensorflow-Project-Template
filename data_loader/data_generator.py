@@ -4,7 +4,7 @@ from tensorflow.python.keras.utils import to_categorical
 
 class DataGenerator:
     def __init__(self, config):
-        self.config = config
+        # self.config = config
         # load data here
         self.X_train = np.ones((500, 784))
         self.y_train = np.ones((500, 10))
@@ -23,6 +23,9 @@ class DataGenerator:
         self.y_train = y_train
         self.y_test = y_test
 
+
     def next_batch(self, batch_size):
-        idx = np.random.choice(500, batch_size)
+        # randomly choose [batch_size] examples
+        idx = np.random.choice(self.X_train.shape[0], batch_size)
+        # return a generator that offers [batch_size] examples each time
         yield self.X_train[idx], self.y_train[idx]

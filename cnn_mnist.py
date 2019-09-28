@@ -1,9 +1,8 @@
 import tensorflow as tf
 
-from models.example_model import ExampleModel
 from models.cnn_mnist_model import CnnMnistModel
 from data_loader.data_generator import DataGenerator
-from trainers.example_trainer import ExampleTrainer
+from trainers.cnn_mnist_trainer import CnnMnistTrainer
 from utils.config import process_config
 from utils.dirs import create_dirs
 from utils.logger import Logger
@@ -27,14 +26,15 @@ def main():
     sess = tf.Session()
     # create your data generator
     data = DataGenerator(config)
+    # use mnist dataset
     data.load_mnist()
     
-    # create an instance of the model you want
+    # create an instance of the cnn model
     model = CnnMnistModel(config)
     # create tensorboard logger
     logger = Logger(sess, config)
     # create trainer and pass all the previous components to it
-    trainer = ExampleTrainer(sess, model, data, config, logger)
+    trainer = CnnMnistTrainer(sess, model, data, config, logger)
     #load model if exists
     model.load(sess)
     # here you train your model
