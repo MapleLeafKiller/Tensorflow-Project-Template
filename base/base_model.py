@@ -31,13 +31,13 @@ class BaseModel:
 
     # just initialize a tensorflow variable to use it as epoch counter
     def init_cur_epoch(self):
-        with tf.variable_scope('cur_epoch'):
+        with tf.variable_scope('cur_epoch'):  # current epoch
             self.cur_epoch_tensor = tf.Variable(0, trainable=False, name='cur_epoch')
             self.increment_cur_epoch_tensor = tf.assign(self.cur_epoch_tensor, self.cur_epoch_tensor + 1)
 
     def init_saver(self):
         # just copy the following line in your child class
-        # self.saver = tf.train.Saver(max_to_keep=self.config.max_to_keep)
+        # self.saver = tf.train.Saver(max_to_keep=self.config.max_ckpt_to_keep)
         raise NotImplementedError
 
     def build_model(self):

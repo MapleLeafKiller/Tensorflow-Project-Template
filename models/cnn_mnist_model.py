@@ -29,7 +29,6 @@ class CnnMnistModel(BaseModel):
             d2 = tf.layers.dense(d1, 10, name="dense2")
 
         with tf.name_scope("loss"):
-            print("shape:self.y:{},d2:{}".format(self.y.shape, d2.shape))
             self.cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=self.y, logits=d2))
             update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
             with tf.control_dependencies(update_ops):
